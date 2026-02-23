@@ -1,9 +1,9 @@
 # 実験
 
-1. WIO Terminalの5方向スイッチでメッセージ生成
+1. Wio Terminalの5方向スイッチでメッセージ生成
 1. UART経由でnRF52840に送信
 1. nRF52840がBLE経由でスマホに転送
-1. スマホ→nRF52840→WIO Terminalの逆方向も可能
+1. スマホ→nRF52840→Wio Terminalの逆方向も可能
 
 ## 環境
 - Windows11(Powershell)
@@ -16,14 +16,14 @@ tinygo version 0.40.1 windows/amd64 (using go version go1.25.7 and LLVM version 
 
 ## 構成
 
-`WIO Terminal (ボタン入力)` <--UART--> `XIAO nRF52840` <--BLE--> スマホ
+`Wio Terminal (ボタン入力)` <--UART--> `XIAO nRF52840` <--BLE--> スマホ
 
 ### 配線
-WIO Terminal ⇔ XIAO nRF52840
+Wio Terminal ⇔ XIAO nRF52840
 
-- WIO Terminal BCM15 (TX) → XIAO nRF52840 RX (D7)
-- WIO Terminal BCM14 (RX) → XIAO nRF52840 TX (D6)
-- WIO Terminal GND → XIAO nRF52840 GND
+- Wio Terminal BCM15 (TX) → XIAO nRF52840 RX (D7)
+- Wio Terminal BCM14 (RX) → XIAO nRF52840 TX (D6)
+- Wio Terminal GND → XIAO nRF52840 GND
 - 両方にUSB給電（別々のUSBポート）
 
 |オモテ|ウラ|
@@ -39,7 +39,7 @@ WIO Terminal ⇔ XIAO nRF52840
 - ![](./assets/pin_list_of_nRF52840.png)
   - https://wiki.seeedstudio.com/ja/XIAO_BLE/
 
-### WIO Terminal側
+### Wio Terminal側
 - 5方向スイッチ操作でUART送信 -> nRF52840
 - [プログラム](./wio_button_uart/main.go)
 
@@ -49,7 +49,7 @@ WIO Terminal ⇔ XIAO nRF52840
 
 ## セットアップ
 
-1. WIO Terminalにフラッシュ
+1. Wio Terminalにフラッシュ
 
     ```sh
     tinygo flash --target wioterminal --size short .\wio_button_uart\
@@ -60,7 +60,7 @@ WIO Terminal ⇔ XIAO nRF52840
     tinygo flash -target=xiao-ble .\nrf52840_uart_ble_bridge\
     ```
 
-1. WIO Terminal側（yterm）
+1. Wio Terminal側（yterm）
     ```sh
     yterm --target wioterminal  --port COM10
     ```
@@ -80,7 +80,7 @@ WIO Terminal ⇔ XIAO nRF52840
 ## 動作確認
 
 ### ボタン→BLE
-1. WIO Terminalの5方向スイッチを押す（例：UPで「Hello」, 右で「Right」）
+1. Wio Terminalの5方向スイッチを押す（例：UPで「Hello」, 右で「Right」）
 1. ytermに「[WIO->nRF] Hello」と表示
     - ![](./assets/0_button_wio.png)
 1. XIAO側のytermに「[UART->BLE] Hello」と表示
@@ -88,7 +88,7 @@ WIO Terminal ⇔ XIAO nRF52840
 1. スマホアプリで「Hello」を受信
     - ![](./assets/mobile_3.png)
         - `TX Characteristic`の`↓`タップで
-### BLE→WIO Terminal
+### BLE→Wio Terminal
 1. スマホアプリから「good!!」を送信
     |RX Characteristicの`↑`タップし|入力して`SEND`|
     |--|--|
@@ -96,14 +96,14 @@ WIO Terminal ⇔ XIAO nRF52840
 
 1. XIAO側のytermに「[BLE->UART] good!!」と表示
     - ![](./assets/2_blue_nRF.png)
-1. WIO Terminal側のytermに「[nRF->WIO] good!!」と表示
+1. Wio Terminal側のytermに「[nRF->WIO] good!!」と表示
     - ![](./assets/3_blue_wio.png)
 
 ## メモ
 
-- WIO TerminalにもBluetoothが使えるチップがあるが、tinygoで対応してないみたい?（2026/02/23）
-- 今持ってるWIO Terminalの5v / 3.3vピン（裏側の40pinの）が~~死んでるみたい~~ 生きてた、というか有効化しないといけなかった
-    - PC <-> FT232 <-> mh-z19b で、mh-z19bが薄っすら赤く光ってたかつセンサー値とれたので、センサー側は生きてる。WIO Terminalにつないだけど、赤く光りすらしなかった
+- Wio TerminalにもBluetoothが使えるチップがあるが、tinygoで対応してないみたい?（2026/02/23）
+- 今持ってるWio Terminalの5v / 3.3vピン（裏側の40pinの）が~~死んでるみたい~~ 生きてた、というか有効化しないといけなかった
+    - PC <-> FT232 <-> mh-z19b で、mh-z19bが薄っすら赤く光ってたかつセンサー値とれたので、センサー側は生きてる。Wio Terminalにつないだけど、赤く光りすらしなかった
         - ![](./assets/ft232_mhz19b.jpg)
     - 生きてた。以下で5vピンを有効化するとセンサーから値取得できた。[takasago](https://x.com/sago35tk/status/2025818091004072369?s=20)さんから教えてもらった、助かった
         ```go

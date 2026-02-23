@@ -25,7 +25,7 @@ func main() {
 	time.Sleep(3 * time.Second)
 	println("=== nRF52840 UART-BLE Bridge ===")
 
-	// UART設定（WIO Terminalとの通信用）
+	// UART設定（Wio Terminalとの通信用）
 	uart := machine.DefaultUART
 	uart.Configure(machine.UARTConfig{
 		BaudRate: 9600,
@@ -66,14 +66,14 @@ func main() {
 		},
 	}))
 
-	println("\n>>> Press buttons on WIO Terminal")
+	println("\n>>> Press buttons on Wio Terminal")
 	println(">>> Messages will be sent via BLE\n")
 
 	uartBuffer := make([]byte, 64)
 	lineBuffer := make([]byte, 0, 128)
 
 	for {
-		// BLE受信処理（スマホ→WIO Terminal）
+		// BLE受信処理（スマホ→Wio Terminal）
 		if bleRxReady {
 			data := bleRxBuffer[:bleRxLen]
 			bleRxReady = false
@@ -81,12 +81,12 @@ func main() {
 			print("[BLE->UART] ")
 			println(string(data))
 
-			// WIO TerminalにUART送信
+			// Wio TerminalにUART送信
 			uart.Write(data)
 			uart.Write([]byte("\r\n"))
 		}
 
-		// UART受信処理（WIO Terminal→BLE）
+		// UART受信処理（Wio Terminal→BLE）
 		if uart.Buffered() > 0 {
 			n, err := uart.Read(uartBuffer)
 			if err != nil {

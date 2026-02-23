@@ -8,7 +8,7 @@ import (
 
 func main() {
 	time.Sleep(3 * time.Second)
-	fmt.Println("=== WIO Terminal Button to UART ===")
+	fmt.Println("=== Wio Terminal Button to UART ===")
 
 	// 5方向スイッチの設定
 	btnUp := machine.WIO_5S_UP
