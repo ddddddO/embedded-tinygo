@@ -87,7 +87,7 @@ WIO Terminal ⇔ XIAO nRF52840
     - ![](./assets/1_button_nRF.png)
 1. スマホアプリで「Hello」を受信
     - ![](./assets/mobile_3.png)
-
+        - `TX Characteristic`の`↓`タップで
 ### BLE→WIO Terminal
 1. スマホアプリから「good!!」を送信
     |RX Characteristicの`↑`タップし|入力して`SEND`|
