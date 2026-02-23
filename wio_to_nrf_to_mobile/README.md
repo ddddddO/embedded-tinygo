@@ -1,6 +1,6 @@
 # 実験
 
-1. WIO Terminalの5方向スイッチや画面タップでメッセージ生成
+1. WIO Terminalの5方向スイッチでメッセージ生成
 1. UART経由でnRF52840に送信
 1. nRF52840がBLE経由でスマホに転送
 1. スマホ→nRF52840→WIO Terminalの逆方向も可能
