@@ -105,3 +105,8 @@ WIO Terminal ⇔ XIAO nRF52840
 - 今持ってるWIO Terminalの5v / 3.3vピン（裏側の40pinの）が死んでるみたい
     - PC <-> FT232 <-> mh-z19b で、mh-z19bが薄っすら赤く光ってたかつセンサー値とれたので、センサー側は生きてる。WIO Terminalにつないだけど、赤く光りすらしなかった
         - ![](./assets/ft232_mhz19b.jpg)
+
+- yterm は以下でインストール
+    ```sh
+    go install github.com/sago35/yterm@latest
+    ```
