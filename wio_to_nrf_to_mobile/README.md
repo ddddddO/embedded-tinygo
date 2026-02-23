@@ -102,9 +102,15 @@ WIO Terminal ⇔ XIAO nRF52840
 ## メモ
 
 - WIO TerminalにもBluetoothが使えるチップがあるが、tinygoで対応してないみたい?（2026/02/23）
-- 今持ってるWIO Terminalの5v / 3.3vピン（裏側の40pinの）が死んでるみたい
+- 今持ってるWIO Terminalの5v / 3.3vピン（裏側の40pinの）が~~死んでるみたい~~ 生きてた、というか有効化しないといけなかった
     - PC <-> FT232 <-> mh-z19b で、mh-z19bが薄っすら赤く光ってたかつセンサー値とれたので、センサー側は生きてる。WIO Terminalにつないだけど、赤く光りすらしなかった
         - ![](./assets/ft232_mhz19b.jpg)
+    - 生きてた。以下で5vピンを有効化するとセンサーから値取得できた。[takasago](https://x.com/sago35tk/status/2025818091004072369?s=20)さんから教えてもらった、助かった
+        ```go
+        power5V := machine.OUTPUT_CTR_5V
+        power5V.Configure(machine.PinConfig{Mode: machine.PinOutput})
+        power5V.High() // 5V出力を有効化
+        ```
 
 - yterm は以下でインストール
     ```sh
